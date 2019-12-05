@@ -1,4 +1,5 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<!-- views/sneakers/new.erb  -->
+<h3>Add some sneakers to yours or your friends account!</h3>
 
 <form class="" action="/sneakers" method="post">
   <label for="name">Name:</label>
@@ -10,5 +11,7 @@
       <option value="<%= user.id %>"><%= user.name %></option>
     <% end %>
   </select>
-  <input type="submit">
+  <input type="submit" value="Create Sneaker">
 </form>
+<br>
+<p>Wanna go back to <a href="/hello">login?</a></p>

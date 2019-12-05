@@ -1,9 +1,42 @@
 
 <form class="" action="/hello" method="post">
   <p>This is your new sneaker app! <%= @user.name %></p>
-  <p> Your sneaker portfolio is <%= @sneaker %>
+
 </form>
 
+<p>
+  Your sneaker portfolio consists of:<br/><br/><% @user.sneakers.each do |sneaker| %>
+    <%= sneaker.name %> which came out in <%= sneaker.year%><br/>
+  <% end %>
+</p>
+
+<hr><br>
+
+<p>Would you like to add more to your collection?</p>
+  <form class="" action="/hello" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="sneaker[name]" value=""><br/>
+    <label for="year">Year:</label>
+    <input type="text" name="sneaker[year]" value=""><br/>
+    <select name="sneaker[user_id]">
+      <option value="<%= @user.id %>">Current User: <%= @user.name %></option>
+    </select><br/>
+    <br>
+    <input type="submit" value="Create Sneaker">
+  </form></br>
+
+<hr><br>
+
+<h4>Wanna edit your sneakers?</h4><br>
+  <p>
+    <select class="sneaker" name="">
+      <% @user.sneakers.each do |sneaker|%>
+      <% end %>
+    </select>
+    <a href="/sneakers/edit">Edit</a>
+  </p>
+
+<hr><br>
 <form class="" action="/logout" method="post">
   <p><a href="/logout">Click me</a> to logout and you'll be
   sent to the main login once again! Thank you for visiting!</p>

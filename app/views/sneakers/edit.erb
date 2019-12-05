@@ -1,0 +1,10 @@
+<h1>Insert the form to edit an instance of your model here.</h1>
+
+<form action="/sneakers/<%=@sneaker.id%>" method="patch">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label>Edit the Sneakers:</label>
+  <br>
+  <input type="text" name="sneaker[name]" value="">
+  <br>
+  <input type="submit" value="update sneaker">
+</form>

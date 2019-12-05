@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   # GET: /users/new
   get "/users/new" do
+    @sneakers = Sneaker.all
     erb :"/users/new"
   end
 
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
   # GET: /users/5
   get "/users/:id" do
     #gets params from url
-    @user = User.find(params[:id]) #define instance variable for view
+    @user = User.find_by(params[:id]) #define instance variable for view
     erb :"users/show" #show single user view
   end
 

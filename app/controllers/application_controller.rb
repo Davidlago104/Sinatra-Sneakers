@@ -18,18 +18,30 @@ class ApplicationController < Sinatra::Base
     end
 
   get "/hello" do
-    @user = User.find_by(id: session[:user_id])
-    @sneaker = Sneaker.find_by(id: session[:sneaker_id])
-      erb :hello
+      if @user = User.find_by(id: session[:user_id])
+        erb :hello
+      else
+        redirect to "/error"
+      end
     end
 
+  post "/hello" do
+    @sneaker = Sneaker.new(params[:sneaker])
+
+    @sneaker.user_id
+
+    if @sneaker.save
+      redirect "/hello"
+    else
+      erb :error
+    end
+  end
+
   post "/login" do
-    # @sneaker = Sneaker.find_by(name: params[:name])
-    user
-    sneaker
+      @user = User.find_by(name: params[:user][:name])
+      @sneakers = Sneaker.all
     if @user && @user.authenticate(params[:user][:password])
-      session[:user_id] = user.id
-      session[:sneaker] = sneaker
+      session[:user_id] = @user.id
       redirect "/hello"
     else
       redirect "/error"
@@ -37,6 +49,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/logout" do
+
     session.clear
 
     redirect to "/"
@@ -46,13 +59,5 @@ class ApplicationController < Sinatra::Base
     erb :error
   end
 
-  def user
-    @user = User.find_by(name: params[:user][:name])
-  end
-
-  def sneaker
-    @sneaker = Sneaker.find_by(name: params[:sneaker])
-    binding.pry
-  end
 
 end
