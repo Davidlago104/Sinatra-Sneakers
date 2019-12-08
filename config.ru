@@ -7,3 +7,4 @@ end
 run ApplicationController
 use SneakersController
 use UsersController
+use Rack::MethodOverride

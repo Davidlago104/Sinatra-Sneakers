@@ -28,13 +28,34 @@
 <hr><br>
 
 <h4>Wanna edit your sneakers?</h4><br>
-  <p>
-    <select class="sneaker" name="">
-      <% @user.sneakers.each do |sneaker|%>
-      <% end %>
-    </select>
-    <a href="/sneakers/edit">Edit</a>
-  </p>
+
+<form class="" action="/sneakers/edit" method="POST">
+
+  <select name="sneaker[id]">
+    <% @user.sneakers.each do |sneaker| %>
+      <option name="<%= sneaker.id %>" value="<%= sneaker.id%>">
+        <%= sneaker.name %>
+      </option>
+    <% end %>
+  </select><br>
+  <input type="submit" value="Let's go">
+</form>
+
+<hr><br/>
+
+<h4>Sold a pair? Let's delete them off your page</h4><br>
+
+<form class="" action="/sneakers/:id" method="Post">
+  <input type="hidden" name="_method" value="delete">
+  <select name="sneaker[id]">
+    <% @user.sneakers.each do |sneaker| %>
+      <option name="<%= sneaker.id %>" value="<%= sneaker.id%>">
+        <%= sneaker.name %>
+      </option>
+    <% end %>
+  </select><br>
+  <input type="submit" value="Let's go">
+</form>
 
 <hr><br>
 <form class="" action="/logout" method="post">
