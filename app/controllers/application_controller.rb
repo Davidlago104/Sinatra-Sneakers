@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
     @sneaker.update(params[:sneaker]) #assign new attributes
 
     if @sneaker.save #saves new sneaker or returns false if unsuccessful
-      redirect '/sneakers' #redirect back to sneakers index page
+      redirect '/hello' #redirect back to sneakers index page
     else
       erb :'sneakers/edit' #show edit sneaker view again(potentially displaying errors)
     end
@@ -68,9 +68,9 @@ class ApplicationController < Sinatra::Base
 
     @sneaker.destroy #delete sneaker
 
-    redirect '/sneakers' #redirect back to sneakers index page
+    redirect '/hello' #redirect back to sneakers index page
   end
-
+  
   get "/logout" do
 
     session.clear
