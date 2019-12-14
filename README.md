@@ -1,5 +1,7 @@
+-what the app actually is and what it does
+-features
 
-
+-To use this app, fork and clone the repo, - open the repo, bundle install and use a migration, then run shotgun and then you'll be able to simulate an experience
 
 
 Copyright 2019 Davidlago104

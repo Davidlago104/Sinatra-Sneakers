@@ -57,7 +57,7 @@ class SneakersController < ApplicationController
     @sneaker.update(params[:sneaker]) #assign new attributes
 
     if @sneaker.save #saves new sneaker or returns false if unsuccessful
-      redirect '/hello' #redirect back to sneakers index page
+      redirect '/users/show' #redirect back to sneakers index page
     else
       erb :'sneakers/edit' #show edit sneaker view again(potentially displaying errors)
     end
@@ -70,7 +70,7 @@ class SneakersController < ApplicationController
 
     @sneaker.destroy #delete sneaker
 
-    redirect '/hello' #redirect back to sneakers index page
+    redirect '/users/show' #redirect back to sneakers index page
   end
 
 end
