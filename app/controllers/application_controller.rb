@@ -29,7 +29,7 @@ class ApplicationController < Sinatra::Base
     @sneaker = Sneaker.new(params[:sneaker])
 
     @sneaker.user_id
-    binding.pry
+
     if @sneaker.save
       redirect "/users/show"
     else
