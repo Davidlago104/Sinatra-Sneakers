@@ -33,7 +33,6 @@ class ApplicationController < Sinatra::Base
 
     @sneaker.user_id
 
-    binding.pry
     if @sneaker.save
       redirect "/users/show"
     else

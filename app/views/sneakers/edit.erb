@@ -2,9 +2,10 @@
 
 <form action="/sneakers/<%= @sneaker.id%>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <label>Edit the Sneakers:</label>
+  <label>Edit Your Sneakers:</label>
   <br>
-  <input type="text" name="sneaker[name]" value="<%=@sneaker.name%>">
+  Name:<input type="text" name="sneaker[name]" value="<%=@sneaker.name%>"><br>
+  Year:<input type="text" name="sneaker[year]" value="<%= @sneaker.year%>">
   <br>
   <input type="submit" value="update sneaker">
 </form>
