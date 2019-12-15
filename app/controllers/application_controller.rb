@@ -1,9 +1,11 @@
 require './config/environment'
+require 'sinatra/flash'
 
 class ApplicationController < Sinatra::Base
 
   configure do
     enable :sessions
+    register Sinatra::Flash
     set :session_secret, 'doggos'
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -21,6 +23,8 @@ class ApplicationController < Sinatra::Base
       if @user = User.find_by(id: session[:user_id])
         erb :"users/show"
       else
+        # flash[:error] = "Something went wrong, please check your login and sign in again"
+
         redirect to "/error"
       end
     end
@@ -33,7 +37,8 @@ class ApplicationController < Sinatra::Base
     if @sneaker.save
       redirect "/users/show"
     else
-      erb :error
+      # flash[:error] = "Something went wrong, please check your login and sign in again"
+      redirect "/login"
     end
   end
 
@@ -44,7 +49,9 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect "/users/show"
     else
-      redirect "/error"
+      flash[:error] = "Something went wrong! Try again please."
+
+      redirect "/login"
     end
   end
 
