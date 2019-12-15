@@ -23,7 +23,6 @@ class ApplicationController < Sinatra::Base
       if @user = User.find_by(id: session[:user_id])
         erb :"users/show"
       else
-        # flash[:error] = "Something went wrong, please check your login and sign in again"
 
         redirect to "/error"
       end
@@ -34,6 +33,7 @@ class ApplicationController < Sinatra::Base
 
     @sneaker.user_id
 
+    binding.pry
     if @sneaker.save
       redirect "/users/show"
     else
