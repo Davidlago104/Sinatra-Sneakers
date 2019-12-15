@@ -1,7 +1,9 @@
--what the app actually is and what it does
--features
+This is a sneaker portfolio for people who are in love with their sneakers and wanted to keep track by adding to their personal profile.
 
--To use this app, fork and clone the repo, - open the repo, bundle install and use a migration, then run shotgun and then you'll be able to simulate an experience
+The features in this app include a profile system that keeps track of all the sneakers someone owns, the ability to update their sneakers wether something was spelled wrong or they happen to sell a pair.
+
+- To use this app, fork and clone the repo
+- Open the repo, bundle install and use a migration, then run shotgun and then you'll be able to simulate an experience
 
 
 Copyright 2019 Davidlago104
