@@ -28,7 +28,7 @@ class SneakersController < ApplicationController
   end
 
   post "/sneakers/edit" do
-    binding.pry
+
     #finds the sneaker and goes within the sneaker nest and looks for the id
     redirect "/sneakers/#{params[:sneaker][:id]}/edit"
   end
