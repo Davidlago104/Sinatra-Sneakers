@@ -20,6 +20,7 @@ class ApplicationController < Sinatra::Base
     end
 
   get "/users/show" do
+    #finds the user by their id and creates a session for them
       if @user = User.find_by(id: session[:user_id])
         erb :"users/show"
       else
@@ -29,6 +30,7 @@ class ApplicationController < Sinatra::Base
     end
 
   post "/users/show" do
+    #creates a new sneaker with the user being attached.
     @sneaker = Sneaker.new(params[:sneaker])
 
     @sneaker.user_id
@@ -36,7 +38,7 @@ class ApplicationController < Sinatra::Base
     if @sneaker.save
       redirect "/users/show"
     else
-      # flash[:error] = "Something went wrong, please check your login and sign in again"
+      #flash takes over and tells the user if there are any errors
       redirect "/login"
     end
   end
@@ -44,6 +46,7 @@ class ApplicationController < Sinatra::Base
   post "/login" do
       @user = User.find_by(name: params[:user][:name])
       @sneakers = Sneaker.all
+    #Checks to see if the user and authenticates the user making sure the password and user name match
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       redirect "/users/show"
