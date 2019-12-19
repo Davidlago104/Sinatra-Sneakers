@@ -15,33 +15,4 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
-  get "/users/show" do
-    #finds the user by their id and creates a session for them
-      if @user = User.find_by(id: session[:user_id])
-        erb :"users/show"
-      else
-
-        redirect to "/error"
-      end
-    end
-
-  post "/users/show" do
-    #creates a new sneaker with the user being attached.
-    @sneaker = Sneaker.new(params[:sneaker])
-
-    @sneaker.user_id
-
-    if @sneaker.save
-      redirect "/users/show"
-    else
-      #flash takes over and tells the user if there are any errors
-      redirect "/login"
-    end
-  end
-
-  get "/error" do
-    erb :error
-  end
-
-
 end

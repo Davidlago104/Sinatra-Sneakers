@@ -48,6 +48,27 @@ class UsersController < ApplicationController
     # redirect "/users"
   end
 
+  get "/users/show" do
+    #finds the user by their id and creates a session for them
+    @user = User.find_by(id: session[:user_id])
+    erb :"users/show"
+
+  end
+
+  post "/users/show" do
+    #creates a new sneaker with the user being attached.
+    @sneaker = Sneaker.new(params[:sneaker])
+
+    @sneaker.user_id
+
+    if @sneaker.save
+      redirect "/users/show"
+    else
+      #flash takes over and tells the user if there are any errors
+      redirect "/login"
+    end
+  end
+  
   # GET: /users/5
   get "/users/:id" do
     #gets params from url
@@ -61,6 +82,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id]) #define intstance variable for view
     erb :"/users/edit"
   end
+
 
   # PATCH: /users/5
   patch "/users/:id" do
