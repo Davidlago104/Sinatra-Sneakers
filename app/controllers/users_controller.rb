@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
     post "/login" do
         @user = User.find_by(name: params[:user][:name])
+
         @sneakers = Sneaker.all
       #Checks to see if the user and authenticates the user making sure the password and user name match
       if @user && @user.authenticate(params[:user][:password])
@@ -68,7 +69,7 @@ class UsersController < ApplicationController
       redirect "/login"
     end
   end
-  
+
   # GET: /users/5
   get "/users/:id" do
     #gets params from url
