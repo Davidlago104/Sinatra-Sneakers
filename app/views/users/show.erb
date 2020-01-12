@@ -1,10 +1,9 @@
 <form class="" action="/users/show" method="post">
-  <p>This is your new sneaker app! <%= @user.name %></p>
-
+  <p>This is your sneaker profile! <%= @user.name %>.</p>
 </form>
 
 <p>
-  Your sneaker portfolio consists of:<br/><br/><% @user.sneakers.each do |sneaker| %>
+  Your current collection appears here.<br/><hr><br/><% @user.sneakers.each do |sneaker| %>
     <%= sneaker.name %> which came out in <%= sneaker.year%><br/>
   <% end %>
 </p>

@@ -20,6 +20,10 @@
         <h3 style="color:red;"><%= flash[:error] %></h3>
       <% end %>
 
+      <%if flash[:good]%>
+        <h3 style="color:green;"><%= flash[:good]%></h3>
+        <%end%>
+
         <%= yield %>
 
       <footer class="branding">

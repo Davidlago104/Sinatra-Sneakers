@@ -44,8 +44,12 @@ class SneakersController < ApplicationController
   get "/sneakers/:id/edit" do
     #get params from url
     @sneaker = Sneaker.find_by(id: params[:id]) #define intstance variable for view
-
-    erb :'sneakers/edit' #show edit sneaker view
+    if @sneaker.user_id == current_user.id
+      erb :'sneakers/edit' #show edit sneaker view
+    else
+      flash[:error] = "You don't have access to that particular sneaker"
+      redirect '/users/show'
+    end
   end
   #   erb :"/sneakers/edit.html"
 
@@ -57,10 +61,14 @@ class SneakersController < ApplicationController
 
     @sneaker.update(params[:sneaker]) #assign new attributes
 
-    if @sneaker.save #saves new sneaker or returns false if unsuccessful
+
+
+    if @sneaker.user_id == current_user.id #saves new sneaker or returns false if unsuccessful
+      @sneaker.save
+      flash[:good] = "Your sneaker has been updated!"
       redirect '/users/show' #redirect back to sneakers index page
     else
-      erb :'sneakers/edit' #show edit sneaker view again(potentially displaying errors)
+      redirect '/users/show' #show edit sneaker view again(potentially displaying errors)
     end
   end
 
@@ -70,7 +78,7 @@ class SneakersController < ApplicationController
     @sneaker = Sneaker.find_by(params[:sneaker]) #define sneaker to delete
 
     @sneaker.destroy #delete sneaker
-
+    flash[:good] = "Your sneaker has been deleted!"
     redirect '/users/show' #redirect back to sneakers index page
   end
 

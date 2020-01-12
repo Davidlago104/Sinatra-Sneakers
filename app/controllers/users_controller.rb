@@ -12,6 +12,7 @@ class UsersController < ApplicationController
       #Checks to see if the user and authenticates the user making sure the password and user name match
       if @user && @user.authenticate(params[:user][:password])
         session[:user_id] = @user.id
+        flash[:good] = "Welcome!"
         redirect "/users/show"
       else
         flash[:error] = "Something went wrong! Try again please."
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
     get "/logout" do
 
       session.clear
-
+      flash[:good] = "You've successfully signed out"
       redirect to "/"
     end
 
@@ -44,7 +45,8 @@ class UsersController < ApplicationController
     #below works with properly formatted params in HTML form
     @user = User.new(params[:user]) #create new user
     @user.save
-    session[:user_id] = @user.id
+    current_user = @user.id
+    flash[:good] = "You've successfully signed up!"
     redirect '/users'
     # redirect "/users"
   end
@@ -90,7 +92,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id]) #define variable to edit
 
     @user.assign_attributes(params[:user]) #assign new attributes
-
+    # add if loggedin?
     if @user.save #saves new user or returns false if unsuccessful
       redirect '/users' #redirect back to users index page
     else
