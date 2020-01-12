@@ -65,9 +65,10 @@ class UsersController < ApplicationController
     @sneaker.user_id
 
     if @sneaker.save
+      flash[:good] = "New sneaker has been added!"
       redirect "/users/show"
     else
-      #flash takes over and tells the user if there are any errors
+      flash[:error] = "Something went wrong, please try again."
       redirect "/login"
     end
   end

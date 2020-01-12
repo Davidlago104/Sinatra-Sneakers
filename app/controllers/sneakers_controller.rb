@@ -12,6 +12,7 @@ class SneakersController < ApplicationController
     erb :"/sneakers/new"
   end
 
+
   # POST: /sneakers
   post "/sneakers" do
     #below works with properly formatted params in HTML form
