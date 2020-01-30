@@ -55,12 +55,8 @@ class UsersController < ApplicationController
     #finds the user by their id and creates a session for them
     @user = User.find_by(id: session[:user_id])
 
-    if logged_in?
-      erb:"user/show"
-    else
-      flash[:error] = "You're not logged in!"
-      redirect "/login"
-    end
+    erb :"users/show"
+
   end
 
   post "/users/show" do
@@ -82,7 +78,13 @@ class UsersController < ApplicationController
   get "/users/:id" do
     #gets params from url
     @user = User.find_by(params[:id]) #define instance variable for view
-    erb :"users/show" #show single user view
+
+    if logged_in? && @user == current_user.id
+      erb :"users/show"
+    else
+      flash[:error] = "You Don't have access to that account"
+      redirect "/login"
+    end
   end
 
   # GET: /users/5/edit
