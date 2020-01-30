@@ -54,8 +54,13 @@ class UsersController < ApplicationController
   get "/users/show" do
     #finds the user by their id and creates a session for them
     @user = User.find_by(id: session[:user_id])
-    erb :"users/show"
 
+    if logged_in?
+      erb:"user/show"
+    else
+      flash[:error] = "You're not logged in!"
+      redirect "/login"
+    end
   end
 
   post "/users/show" do

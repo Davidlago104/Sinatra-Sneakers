@@ -17,9 +17,10 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find(session[:user_id])
     end
 
-    # def stop_them(session)
-    #   @current_user ||=
-    # end
+    def logged_in?
+      !!@current_user
+    end
+
   end
   # add error messages to edit blocks -done
   # add to delete messages and delete things that arent theirs- done

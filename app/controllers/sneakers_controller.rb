@@ -45,6 +45,7 @@ class SneakersController < ApplicationController
   get "/sneakers/:id/edit" do
     #get params from url
     @sneaker = Sneaker.find_by(id: params[:id]) #define intstance variable for view
+
     if @sneaker.user_id == current_user.id
       erb :'sneakers/edit' #show edit sneaker view
     else
