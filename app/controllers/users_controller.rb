@@ -11,6 +11,7 @@ class UsersController < ApplicationController
         @sneakers = Sneaker.all
       #Checks to see if the user and authenticates the user making sure the password and user name match
       if @user && @user.authenticate(params[:user][:password])
+
         session[:user_id] = @user.id
         flash[:good] = "Welcome!"
         redirect "/users/show"
@@ -44,11 +45,15 @@ class UsersController < ApplicationController
   post "/users" do
     #below works with properly formatted params in HTML form
     @user = User.new(params[:user]) #create new user
-    @user.save
-    current_user = @user.id
-    flash[:good] = "You've successfully signed up!"
-    redirect '/users'
-    # redirect "/users"
+
+    if @user.save
+      session[:user_id] = @user.id
+      flash[:good] = "You've successfully signed up!"
+      erb :"users/show"
+    else
+      flash[:error] = "That name is already being used!"
+      redirect '/users/new'
+    end
   end
 
   get "/users/show" do
@@ -70,7 +75,7 @@ class UsersController < ApplicationController
       redirect "/users/show"
     else
       flash[:error] = "Something went wrong, please try again."
-      redirect "/login"
+      redirect "/users/show"
     end
   end
 
